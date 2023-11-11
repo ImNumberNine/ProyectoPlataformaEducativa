@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 
-namespace RisingSunEducationAPI.Models.EntityModels
+namespace LearnSphere.Models.EntityModels
 {
     public class Archivo
     {

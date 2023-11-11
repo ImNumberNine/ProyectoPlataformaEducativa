@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace RisingSunEducationAPI.Models.EntityModels
+namespace LearnSphere.Models.EntityModels
 {
     public class Modulo
     {
