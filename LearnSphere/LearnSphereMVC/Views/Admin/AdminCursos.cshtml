@@ -1,0 +1,57 @@
+﻿@model List<LearnSphereMVC.Models.InputModels.Curso>
+@{
+    ViewData["Title"] = "Cursos";
+    Layout = "~/Views/Shared/_NavbarAdmin.cshtml";
+}
+<!-- DataTales Example -->
+<div class="card shadow mb-4" style="margin:20px">
+    <div class="card-header py-3 bg-primary">
+        <h6 class="m-0 font-weight-bold text-white">Lista de Cursos</h6>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-12">
+                <a href="/Curso/NuevoCurso" class="btn btn-success btn-sm">Crear Nuevo</a>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-sm-12">
+
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="tabla" style="width:100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Codigo</th>
+                                <th>Nombre</th>
+                                <th>Nivel</th>
+                                <th>Fecha Inicio</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            @foreach (var curso in Model)
+                            {
+                                <tr>
+                                    <th>@curso.Id</th>
+                                    <th>@curso.NombreCurso</th>
+                                    <th>@curso.Nivel</th>
+                                    <th>@curso.FechaInicio.ToString("dddd, dd MMMM yyyy")</th>
+                                    <th><a href="/Admin/VerCursoAdmin/@curso.Id" class="btn btn-primary btn-sm">Ver Curso</a></th>
+                                    <th><a href="/Curso/EliminarCurso/@curso.Id" class="btn btn-danger btn-sm">Eliminar</a></th>
+                                </tr>
+                            }
+                        </tfoot>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+

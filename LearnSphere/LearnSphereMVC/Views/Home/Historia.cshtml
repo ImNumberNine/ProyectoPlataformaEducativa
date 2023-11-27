@@ -1,0 +1,107 @@
+﻿@using System.Security.Claims;
+@{
+    var isAuthenticated = !string.IsNullOrEmpty(Context.Session.GetString("JWToken"));
+    var userEmail = "";
+    if (isAuthenticated)
+    {
+        var tokenHandler = new System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler();
+        var jwtToken = tokenHandler.ReadJwtToken(Context.Session.GetString("JWToken"));
+        userEmail = jwtToken.Claims.First(claim => claim.Type == ClaimTypes.Email).Value;
+    }
+}
+@{
+
+    Layout = "_Layout";
+}
+
+<body>
+    <div class="preloader"><span></span></div>
+    <!-- /.preloader -->
+    <div class="page-wrapper">
+        <div class="topbar-one">
+            <!-- Información Inicial -->
+            <div class="container">
+                <div class="topbar-one__left">
+                    <a href="#">LearnSphere@Sphere.com</a>
+                    <a href="#">2222-4444</a>
+                </div>
+                <!-- /.topbar-one__left -->
+                <div class="topbar-one__right">
+                    @if (isAuthenticated)
+                    {
+                        <a href="/Usuario/Perfil">@userEmail</a>
+                        <a href="/Usuario/CerrarSesion">Cerrar Sesión</a>
+                    }
+                    else
+                    {
+                        <a href="/Usuario/InicioSesion">Iniciar Sesión</a>
+                        <a href="/Usuario/Registro">Registrarse</a>
+                    }
+                </div>
+                <!-- /.topbar-one__right -->
+            </div>
+            <!-- /.container -->
+            <!-- Fin Información Inicial -->
+        </div>
+        <!-- /.topbar-one -->
+        <header class="site-header site-header__header-one ">
+            @Html.Partial("_Navbar")
+            <section class="inner-banner">
+                <div class="container">
+                    <ul class="list-unstyled thm-breadcrumb">
+                        <li><a href="#">Inicio</a></li>
+                    </ul><!-- /.list-unstyled -->
+                    <h2 class="inner-banner__title">Historia</h2><!-- /.inner-banner__title -->
+                </div>
+            </section><!-- /.inner-banner -->
+            <section class="about-one about-one__about-page">
+
+                <div class="container text-center">
+                    <div class="block-title text-center">
+                        <h2 class="block-title__title">Let’s do study in <br> modern campus</h2>
+
+                    </div>
+                    <!-- /.block-title -->
+                    <div class="about-one__img">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <img src="assets/images/About1.jpg" alt="">
+                            </div>
+                            <!-- /.col-lg-6 -->
+                            <div class="col-lg-6">
+                                <img src="assets/images/About1.jpg" alt="">
+                            </div>
+                            <!-- /.col-lg-6 -->
+                        </div>
+                    </div>
+                    <!-- /.about-one__img -->
+                    <p class="about-one__text">
+                        Lorem ipsum dolor sit amet. Quo enim consequatur a quos distinctio sed sequi
+                        <br> mollitia non repudiandae velit et libero harum in repudiandae atque eum numquam nulla <br> believable. Lorem Ipsn gravida nibh vel velit auctor aliquetn auci elit cons.
+                    </p>
+                    <!-- /.about-one__text -->
+                    <a href="#" class="thm-btn about-one__btn">Start Learning Now</a>
+                    <!-- /.thm-btn -->
+                </div>
+                <!-- /.container -->
+            </section>
+
+            <script src="~/assets/js/jquery.min.js"></script>
+            <script src="~/assets/js/bootstrap.bundle.min.js"></script>
+            <script src="~/assets/js/owl.carousel.min.js"></script>
+            <script src="~/assets/js/waypoints.min.js"></script>
+            <script src="~/assets/js/jquery.counterup.min.js"></script>
+            <script src="~/assets/js/TweenMax.min.js"></script>
+            <script src="~/assets/js/wow.js"></script>
+            <script src="~/assets/js/jquery.magnific-popup.min.js"></script>
+            <script src="~/assets/js/countdown.min.js"></script>
+            <script src="~/assets/js/vegas.min.js"></script>
+            <script src="~/assets/js/jquery.validate.min.js"></script>
+            <script src="~/assets/js/jquery.ajaxchimp.min.js"></script>
+
+            <!-- template scripts -->
+            <script src="~/assets/js/theme.js"></script>
+</body>
+</html>
+
+

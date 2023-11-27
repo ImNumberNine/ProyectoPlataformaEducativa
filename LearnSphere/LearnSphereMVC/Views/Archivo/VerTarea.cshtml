@@ -1,0 +1,244 @@
+﻿@model LearnSphereMVC.Models.InputModels.VerTareaModel
+@using System.Security.Claims;
+@{
+    var isAuthenticated = !string.IsNullOrEmpty(Context.Session.GetString("JWToken"));
+    var userEmail = "";
+    var IdUsuario = "";
+    if (isAuthenticated)
+    {
+        var tokenHandler = new System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler();
+        var jwtToken = tokenHandler.ReadJwtToken(Context.Session.GetString("JWToken"));
+        userEmail = jwtToken.Claims.First(claim => claim.Type == ClaimTypes.Email).Value;
+        IdUsuario = jwtToken.Claims.First(claim => claim.Type == ClaimTypes.NameIdentifier).Value;
+    }
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Detalle de Archivo || LearnSphere || Online Education Learning</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="~/assets/images/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="~/assets/images/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="~/assets/images/favicons/favicon-16x16.png">
+    <link rel="manifest" href="~/assets/images/favicons/site.webmanifest">
+
+    <!-- plugin scripts -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,500i,600,700,800%7CSatisfy&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="~/assets/css/animate.min.css">
+    <link rel="stylesheet" href="~/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/assets/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="~/assets/plugins/fontawesome-free-5.11.2-web/css/all.min.css">
+    <link rel="stylesheet" href="~/assets/plugins/kipso-icons/style.css">
+    <link rel="stylesheet" href="~/assets/css/magnific-popup.css">
+    <link rel="stylesheet" href="~/assets/css/vegas.min.css">
+
+    <!-- template styles -->
+    <link rel="stylesheet" href="~/assets/css/style.css">
+    <link rel="stylesheet" href="~/assets/css/responsive.css">
+</head>
+
+<body>
+
+    <div class="preloader"><span></span></div><!-- /.preloader -->
+    <div class="page-wrapper">
+        <div class="topbar-one">
+            <div class="container">
+                <div class="topbar-one__left">
+                    <a href="#">needhelp@kipso.com</a>
+                    <a href="#">444 888 0000</a>
+                </div><!-- /.topbar-one__left -->
+                <div class="topbar-one__right">
+                    @if (isAuthenticated)
+                    {
+                        <a href="/Usuario/Perfil">@userEmail</a>
+                        <a href="/Usuario/CerrarSesion">Cerrar Sesión</a>
+                    }
+                    else
+                    {
+                        <a href="/Usuario/InicioSesion">Iniciar Sesión</a>
+                        <a href="/Usuario/Registro">Registrarse</a>
+                    }
+                </div>
+            </div><!-- /.container -->
+        </div><!-- /.topbar-one -->
+        <header class="site-header site-header__header-one ">
+            @Html.Partial("_Navbar")
+        </header>
+
+
+        <!--**** BANNER DE FONDO SE DEBE AJUSTAR AL NUESTRO ****-->
+        <section class="inner-banner">
+
+
+            <!--**** INICIO, PODRIA SER UNA VARIABLE QUE CAMBIE DE ACUERDO AL ARCHIVO SELECCIONADO PREVIAMENTE ****-->
+            <div class="container">
+                <h2 class="inner-banner__title">TAREA</h2><!-- /.inner-banner__title -->
+            </div><!-- /.container -->
+            <!--**** FIN, PODRIA SER UNA VARIABLE QUE CAMBIE DE ACUERDO AL ARCHIVO SELECCIONADO PREVIAMENTE ****-->
+
+
+        </section><!-- /.inner-banner -->
+        <!--**** FIN BANNER DE FONDO ****-->
+
+
+        <section class="course-details">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="course-details__content">
+
+
+                            <!--**** INICIO AUTOR DEL CURSO AKA PROFESOR, SE PUEDE ELIMINAR DE NO SER NECESARIO
+                                <p class="course-details__author">
+                                <img src="assets/images/team-1-1.jpg" alt="">
+                                by <a href="#">Addie Walters</a>
+                            </p> /.course-details__author
+                            **** FIN AUTOR DEL CURSO AKA PROFESOR, SE PUEDE ELIMINAR DE NO SER NECESARIO-->
+                            <!--**** INICIO IMAGEN DEL CURSO O MODULO ****-->
+                            <div class="course-details__top">
+                                <div class="course-details__top-left">
+                                    <h2 class="course-details__title">@Model.Archivo.Nombre</h2>
+                                    <!-- /.course-details__title -->
+                                </div><!-- /.course-details__top-left -->
+                                <div class="course-details__top-right">
+                                    <a href="#" class="course-one__category">@Model.Archivo.Categoria</a><!-- /.course-one__category -->
+                                </div><!-- /.course-details__top-right -->
+                            </div><!-- /.course-details__top -->
+                            <!--**** INICIO CONTENIDO DE CUADRO INFORMATIVO CON ARCHIVOS ****-->
+                            <ul class="course-details__tab-navs list-unstyled nav nav-tabs" role="tablist">
+                                <li>
+                                    <a class="" role="tab" data-toggle="tab" href="#tarea">Tarea</a>
+                                </li>
+                            </ul><!-- /.course-details__tab-navs list-unstyled -->
+                            <div class="tab-content course-details__tab-content ">
+                                <div class="tab-pane show active animated fadeInUp" role="tabpanel" id="tarea">
+                                    <h3 class="course-details__tab-title">DESCRIPCIÓN</h3>
+                                    <!-- /.course-details__title -->
+                                    <br>
+                                    <p class="course-details__tab-text">
+                                        @Model.Archivo.Descipcion
+                                    </p>
+                                    <!-- /.course-details__tab-text -->
+                                    <br>
+                                    <h3 class="course-details__tab-title">SUBIR ENTREGA</h3>
+                                    <br>
+                                    @if (!@Model.Calificacion.Completado)
+                                    {
+                                        @using (Html.BeginForm("VerTarea", "Archivo", FormMethod.Post, new { @class = "course-details__comment-form", enctype = "multipart/form-data", id = "tareaForm" }))
+                                        {
+                                            <input type="file" id="myFile" name="Tarea">
+                                            <span asp-validation-for="@Model.SubirTarea.Tarea" style="color:mediumpurple"></span>
+                                            <br>
+                                            <input type="hidden" value="@Model.Calificacion.Id" name="id" />
+
+                                            <button type="button" class="thm-btn course-details__comment-form-btn" onclick="submitForm()">Subir</button>
+                                        }
+
+                                        <script>
+                                            function submitForm() {
+                                                var form = document.getElementById("tareaForm");
+                                                var formData = new FormData(form);
+
+                                                var xhr = new XMLHttpRequest();
+                                                xhr.open("PUT", form.action, true);
+                                                xhr.onload = function () {
+                                                    if (xhr.status === 200) {
+                                                        var miValor = parseInt(xhr.responseText); // Convertir la respuesta a un número
+                                                        window.location.href = "https://localhost:7105/Archivo/VerTarea?id=" + miValor; // Utiliza miValor en lugar de miId
+                                                    } else {
+                                                        // La solicitud PUT falló
+                                                        // Maneja el error de acuerdo a tus necesidades
+                                                    }
+                                                };
+                                                xhr.send(formData);
+                                            }
+                                        </script>
+                                    }
+                                    else
+                                    {
+                                        <p class="course-details__tab-text">
+                                            La tarea esta lista para ser revisada, pronto su profesor le dara la nota!
+                                        </p>
+                                    }
+
+
+                                </div>
+                            </div>
+                            <!--**** FIN CONTENIDO DE CUADRO INFORMATIVO CON ARCHIVOS ****-->
+
+
+                        </div>
+                    </div>
+                    <!--**** INICIO COLUMNA LATERAL DERECHA ****-->
+                    <div class="col-lg-4">
+                        <div class="course-details__meta">
+                            <a href="#" class="course-details__meta-link">
+                                <span class="course-details__meta-icon">
+                                    <i class="far fa-clock"></i><!-- /.far fa-clock -->
+                                </span><!-- /.course-details__icon -->
+                                Estado: @if (!@Model.Calificacion.Completado)
+                                {
+                                    <span>No completado</span>
+                                }
+                                else
+                                {
+                                    <span>Completado</span>
+                                }
+
+                            </a><!-- /.course-details__meta-link -->
+                            @if (@Model.Calificacion.Completado)
+                            {
+                                <a href="#" class="course-details__meta-link">
+                                    <span class="course-details__meta-icon">
+                                        <i class="far fa-flag"></i><!-- /.far fa-folder -->
+                                    </span>
+                                    @if (@Model.Calificacion.NotaArchivo == 0)
+                                    {
+                                        <span>En calificacion</span>
+                                    }
+
+                                    else{
+                                        <span>Nota final:@Model.Calificacion.NotaArchivo</span>
+                                    }
+                                </a>
+                                <!-- /.course-details__meta-link -->
+                            }
+                        </div><!-- /.course-details__meta -->
+                    </div><!-- /.col-lg-4 -->
+                    <!--**** FIN COLUMNA LATERAL DERECHA ****-->
+
+
+                </div>
+            </div>
+        </section>
+
+
+
+
+
+    </div>
+
+    <script src="~/assets/js/jquery.min.js"></script>
+    <script src="~/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="~/assets/js/owl.carousel.min.js"></script>
+    <script src="~/assets/js/waypoints.min.js"></script>
+    <script src="~/assets/js/jquery.counterup.min.js"></script>
+    <script src="~/assets/js/TweenMax.min.js"></script>
+    <script src="~/assets/js/wow.js"></script>
+    <script src="~/assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/assets/js/countdown.min.js"></script>
+    <script src="~/assets/js/vegas.min.js"></script>
+    <script src="~/assets/js/jquery.validate.min.js"></script>
+    <script src="~/assets/js/jquery.ajaxchimp.min.js"></script>
+
+    <!-- template scripts -->
+    <script src="~/assets/js/theme.js"></script>
+
+</body>
+
+</html>

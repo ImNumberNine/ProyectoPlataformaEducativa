@@ -1,0 +1,234 @@
+﻿@model LearnSphereMVC.Models.InputModels.VerModuloUsuario
+@using System.Security.Claims;
+@{
+    var isAuthenticated = !string.IsNullOrEmpty(Context.Session.GetString("JWToken"));
+    var userEmail = "";
+    var IdUsuario = "";
+    if (isAuthenticated)
+    {
+        var tokenHandler = new System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler();
+        var jwtToken = tokenHandler.ReadJwtToken(Context.Session.GetString("JWToken"));
+        userEmail = jwtToken.Claims.First(claim => claim.Type == ClaimTypes.Email).Value;
+    }
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Detalle de Modulo || LearnSphere || Online Education Learning</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="~/assets/images/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="~/assets/images/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="~/assets/images/favicons/favicon-16x16.png">
+    <link rel="manifest" href="~/assets/images/favicons/site.webmanifest">
+
+    <!-- plugin scripts -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,500i,600,700,800%7CSatisfy&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="~/assets/css/animate.min.css">
+    <link rel="stylesheet" href="~/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/assets/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="~/assets/plugins/fontawesome-free-5.11.2-web/css/all.min.css">
+    <link rel="stylesheet" href="~/assets/plugins/kipso-icons/style.css">
+    <link rel="stylesheet" href="~/assets/css/magnific-popup.css">
+    <link rel="stylesheet" href="~/assets/css/vegas.min.css">
+
+    <!-- template styles -->
+    <link rel="stylesheet" href="~/assets/css/style.css">
+    <link rel="stylesheet" href="~/assets/css/responsive.css">
+</head>
+
+<body>
+    <div class="preloader"><span></span></div><!-- /.preloader -->
+    <div class="page-wrapper">
+        <div class="topbar-one">
+            <div class="container">
+                <div class="topbar-one__left">
+                    <a href="#">needhelp@kipso.com</a>
+                    <a href="#">444 888 0000</a>
+                </div><!-- /.topbar-one__left -->
+                <div class="topbar-one__right">
+                    <a href="/Usuario/Perfil">@userEmail</a>
+                    <a href="/Usuario/CerrarSesion">Cerrar Sesión</a>
+                </div>
+            </div><!-- /.container -->
+        </div><!-- /.topbar-one -->
+    </div>
+    <header class="site-header site-header__header-one ">
+        @Html.Partial("_Navbar")
+    </header>
+    <!--** FIN DE NAVBAR, SE DEBE REEMPLAZAR POR EL NUESTRO **-->
+    <!--** BANNER DE FONDO SE DEBE AJUSTAR AL NUESTRO **-->
+    <section class="inner-banner">
+        <div class="container">
+            <ul class="list-unstyled thm-breadcrumb">
+                <li><a href="#">CURSO</a></li>
+                <li class="active"><a href="#">MODULO </a></li>
+            </ul><!-- /.list-unstyled -->
+            <h2 class="inner-banner_title">DETALLES DE MODULO</h2><!-- /.inner-banner_title -->
+        </div><!-- /.container -->
+    </section><!-- /.inner-banner -->
+    <!--** FIN BANNER DE FONDO **-->
+    <section class="course-details">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="course-details__content">
+
+
+                        <!--** INICIO AUTOR DEL CURSO AKA PROFESOR, SE PUEDE ELIMINAR DE NO SER NECESARIO
+                            <p class="course-details__author">
+                            <img src="assets/images/team-1-1.jpg" alt="">
+                            by <a href="#">Addie Walters</a>
+                        </p> /.course-details__author
+                        ** FIN AUTOR DEL CURSO AKA PROFESOR, SE PUEDE ELIMINAR DE NO SER NECESARIO-->
+                        <!--** INICIO IMAGEN DEL CURSO O MODULO **-->
+                        <div class="course-details__top">
+                            <div class="course-details__top-left">
+                                <h2 class="course-details__title">@Model.Curso.NombreCurso</h2>
+                                <!-- /.course-details__title -->
+                            </div><!-- /.course-details__top-left -->
+                        </div><!-- /.course-details__top -->
+                        <div class="course-one__image">
+                            <img src="assets/images/course-d-1.jpg" alt="">
+                            <i class="far fa-heart"></i><!-- /.far fa-heart -->
+                        </div><!-- /.course-one__image -->
+                        <!--** FIN IMAGEN DEL CURSO O MODULO **-->
+                        <!--** INICIO CONTENIDO DE CUADRO INFORMATIVO CON ARCHIVOS **-->
+                        <ul class="course-details__tab-navs list-unstyled nav nav-tabs" role="tablist">
+                            <li>
+                                <a class="" role="tab" data-toggle="tab" href="#curriculum">@Model.Modulo.Nombre</a>
+                            </li>
+                        </ul><!-- /.course-details__tab-navs list-unstyled -->
+                        <div class="tab-content course-details__tab-content ">
+                            <div class="tab-pane show active animated fadeInUp" role="tabpanel" id="curriculum">
+                                <h3 class="course-details__tab-title">DESCRIPCIÓN</h3>
+                                <!-- /.course-details__title -->
+                                <br>
+                                <p class="course-details__tab-text">
+                                    @Model.Modulo.Descripcion
+                                </p>
+                                <!-- /.course-details__tab-text -->
+                                <br>
+                                <h3 class="course-details__tab-title">ARCHIVOS ADICIONALES</h3>
+                                <br>
+                                <ul class="course-details__curriculum-list list-unstyled">
+                                    @foreach (var archivo in Model.Calificaciones)
+                                    {
+                                        <li>
+                                            <div class="course-details__curriculum-list-left">
+
+                                                @if (archivo.Archivo.Categoria == "Link")
+                                                {
+                                                    <div class="course-details__curriculum-list-left">
+                                                        <div class="course-details__meta-icon video-icon">
+                                                            <i class="fas fa-play"></i><!-- /.fas fa-play -->
+                                                        </div>
+                                                        <!-- /.course-details__icon -->
+                                                        <a href="@archivo.Archivo.Link">@archivo.Archivo.Nombre</a>
+                                                        <span> LINK </span>
+                                                    </div>
+                                                   
+                                                    <!-- /.course-details__curriculum-list-right -->
+                                                }
+                                                else if (archivo.Archivo.Categoria == "Archivo")
+                                                {
+                                                    <div class="course-details__curriculum-list-left">
+                                                        <div class="course-details__meta-icon file-icon">
+                                                            <i class="fas fa-folder"></i><!-- /.far fa-folder -->
+                                                        </div>
+
+                                                        <!-- /.course-details__icon -->
+                                                        <a href="/Archivo/VerTarea/@archivo.Archivo.Id ">@archivo.Archivo.Nombre</a>
+                                                    </div>
+                                                    @if (archivo.Calificacion.Completado == false)
+                                                    {
+                                                        <span> No completado </span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span> Completado </span>
+                                                    }
+                                                }
+                                                else if (archivo.Archivo.Categoria == "Tarea")
+                                                {
+                                                    <div class="course-details__curriculum-list-left">
+                                                        <div class="course-details__meta-icon file-icon">
+                                                            <i class="fas fa-folder"></i><!-- /.far fa-folder -->
+                                                        </div>
+
+                                                        <!-- /.course-details__icon -->
+                                                        <a href="/Archivo/VerTarea/@archivo.Archivo.Id ">@archivo.Archivo.Nombre</a>
+                                                        <span> Tarea </span>
+                                                    </div>
+                                                    @if (archivo.Calificacion.Completado == false)
+                                                    {
+                                                        <span> No completado </span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span> Completado </span>
+                                                    }
+                                                }
+                                            </div>
+                                        </li>
+                                    }
+                                </ul><!-- /.course-details__curriculum-list -->
+                            </div>
+                        </div>
+                        <!--** FIN CONTENIDO DE CUADRO INFORMATIVO CON ARCHIVOS **-->
+                    </div>
+                </div>
+                <!--** INICIO COLUMNA LATERAL DERECHA **-->
+                <div class="col-lg-4">
+                    <div class="course-details__meta">
+                        <a href="#" class="course-details__meta-link">
+
+                            Detalles Curso: <span></span>
+                        </a><!-- /.course-details__meta-link -->
+                        <a href="#" class="course-details__meta-link">
+                            <span class="course-details__meta-icon">
+                                <i class="far fa-user-circle"></i><!-- /.far fa-user-circle -->
+                            </span><!-- /.course-details__icon -->
+                            Estudiantes: <span>@Model.CantidadEstudiantes</span>
+                        </a><!-- /.course-details__meta-link -->
+                        <a href="#" class="course-details__meta-link">
+                            <span class="course-details__meta-icon">
+                                <i class="far fa-flag"></i><!-- /.far fa-flag -->
+                            </span><!-- /.course-details__icon -->
+                            Nivel: <span>@Model.Curso.Nivel</span>
+                        </a><!-- /.course-details__meta-link -->
+                    </div><!-- /.course-details__meta -->
+                </div><!-- /.col-lg-4 -->
+                <!--** FIN COLUMNA LATERAL DERECHA **-->
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+    <script src="~/assets/js/jquery.min.js"></script>
+    <script src="~/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="~/assets/js/owl.carousel.min.js"></script>
+    <script src="~/assets/js/waypoints.min.js"></script>
+    <script src="~/assets/js/jquery.counterup.min.js"></script>
+    <script src="~/assets/js/TweenMax.min.js"></script>
+    <script src="~/assets/js/wow.js"></script>
+    <script src="~/assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/assets/js/countdown.min.js"></script>
+    <script src="~/assets/js/vegas.min.js"></script>
+    <script src="~/assets/js/jquery.validate.min.js"></script>
+    <script src="~/assets/js/jquery.ajaxchimp.min.js"></script>
+
+    <!-- template scripts -->
+    <script src="~/assets/js/theme.js"></script>
+
+</body>
+
+</html>

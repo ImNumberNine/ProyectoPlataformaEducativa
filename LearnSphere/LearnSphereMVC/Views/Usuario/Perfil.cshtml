@@ -1,0 +1,167 @@
+﻿@model List<LearnSphereMVC.Models.InputModels.Curso>
+@using System.Security.Claims;
+@{
+    var isAuthenticated = !string.IsNullOrEmpty(Context.Session.GetString("JWToken"));
+    var userEmail = "";
+    var userName = "";
+    var userLastName = "";
+    var userRole = "";
+
+    if (isAuthenticated)
+    {
+        var tokenHandler = new System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler();
+        var jwtToken = tokenHandler.ReadJwtToken(Context.Session.GetString("JWToken"));
+        userEmail = jwtToken.Claims.First(claim => claim.Type == ClaimTypes.Email).Value;
+        userName = jwtToken.Claims.First(claim => claim.Type == ClaimTypes.Name).Value;
+        userLastName = jwtToken.Claims.First(claim => claim.Type == ClaimTypes.Surname).Value;
+        userRole = jwtToken.Claims.First(claim => claim.Type == ClaimTypes.Role).Value;
+    }
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Detalle de Modulo || Kipso || Online Education Learning & LMS HTML Template</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="~/assets/images/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="~/assets/images/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="~/assets/images/favicons/favicon-16x16.png">
+    <link rel="manifest" href="~/assets/images/favicons/site.webmanifest">
+
+    <!-- plugin scripts -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,500i,600,700,800%7CSatisfy&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="~/assets/css/animate.min.css">
+    <link rel="stylesheet" href="~/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/assets/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="~/assets/plugins/fontawesome-free-5.11.2-web/css/all.min.css">
+    <link rel="stylesheet" href="~/assets/plugins/kipso-icons/style.css">
+    <link rel="stylesheet" href="~/assets/css/magnific-popup.css">
+    <link rel="stylesheet" href="~/assets/css/vegas.min.css">
+
+    <!-- template styles -->
+    <link rel="stylesheet" href="~/assets/css/style.css">
+    <link rel="stylesheet" href="~/assets/css/responsive.css">
+</head>
+
+<style>
+    .profile-sidebar {
+        background-color: #f8f9fa;
+        padding: 20px;
+        width: 300px;
+        height: 100%;
+        border-right: 1px solid #e0e0e0;
+    }
+
+        .profile-sidebar img {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+
+    .profile-content {
+        padding: 20px;
+    }
+
+    .course-list {
+        list-style-type: none;
+        padding: 0;
+    }
+
+        .course-list li {
+            margin-bottom: 10px;
+        }
+</style>
+<body>
+
+
+    <header class="site-header site-header__header-one ">
+        @Html.Partial("_Navbar")
+    </header>
+    <!--** FIN DE NAVBAR, SE DEBE REEMPLAZAR POR EL NUESTRO **-->
+    <!--** BANNER DE FONDO SE DEBE AJUSTAR AL NUESTRO **-->
+    <section class="inner-banner">
+        <div class="container">
+            <ul class="list-unstyled thm-breadcrumb">
+                <li><a href="#">Mi Perfil</a></li>
+                <li class="active"><a href="#">Usuario</a></li>
+            </ul><!-- /.list-unstyled -->
+            <h2 class="inner-banner_title">Perfil Personal</h2><!-- /.inner-banner_title -->
+            <p> </p>
+        </div><!-- /.container -->
+    </section><!-- /.inner-banner -->
+    <!--** FIN BANNER DE FONDO **-->
+
+    <p> </p>
+
+    <section class="profile-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="profile-sidebar">
+                        <div class="profile-image">
+                            <img src="~/assets/images/Default.jpg" alt="Foto de perfil" class="rounded-circle">
+                        </div>
+                        <h2 class="profile-name">@userName @userLastName</h2>
+                        <p class="profile-email">@userEmail</p>
+                        <div class="profile-info">
+                            <p>Rol: @userRole</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="profile-content">
+                        <h2>Cursos matriculados</h2>
+                        <div class="row">
+                             @foreach(var curso in Model){
+                            <div class="col-md-6" style="margin-top:20px">
+                                    <div class="card course-card">
+                                        <img src="~/assets/ImagenesCursos/@curso.Imagen" class="card-img-top" alt="@curso.NombreCurso">
+                                    <div class="card-body">
+                                        <h5 class="card-title">@curso.NombreCurso</h5>
+                                        <p class="card-text">@curso.Descripcion</p>
+                                        @*<div class="progress">
+                                            <div class="progress-bar" role="progressbar" style="width: 70%;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">70%</div>
+                                        </div>*@
+                                    </div>
+                                </div> 
+                            </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    </div>
+
+
+
+
+
+
+    <script src="~/assets/js/jquery.min.js"></script>
+    <script src="~/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="~/assets/js/owl.carousel.min.js"></script>
+    <script src="~/assets/js/waypoints.min.js"></script>
+    <script src="~/assets/js/jquery.counterup.min.js"></script>
+    <script src="~/assets/js/TweenMax.min.js"></script>
+    <script src="~/assets/js/wow.js"></script>
+    <script src="~/assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/assets/js/countdown.min.js"></script>
+    <script src="~/assets/js/vegas.min.js"></script>
+    <script src="~/assets/js/jquery.validate.min.js"></script>
+    <script src="~/assets/js/jquery.ajaxchimp.min.js"></script>
+
+    <!-- template scripts -->
+    <script src="~/assets/js/theme.js"></script>
+
+</body>
+
+</html>

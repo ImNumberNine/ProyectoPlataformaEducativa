@@ -1,0 +1,89 @@
+﻿@model LearnSphereMVC.Models.InputModels.UsuarioInicioSesionModel
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+
+
+
+
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CodePen - Material Login Form</title>
+    <link href="~/mdb-ui-kit/css/mdb.min.css" rel="stylesheet" />
+    <link href="~/css/inicioSesion.css" rel="stylesheet" />
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+</head>
+
+<body>
+    @Html.Partial("_Navbar")
+
+    <section class="vh-100" style="background-color: #7C4BC0;">
+        <div class="container h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-lg-12 col-xl-11">
+                    <div class="card text-black" style="border-radius: 25px;">
+                        <div class="card-body p-md-5">
+                            <div class="row justify-content-center">
+                                <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1 d-flex flex-column justify-content-center">
+                                    <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Iniciar Sesion</p>
+                                    @using (Html.BeginForm("InicioSesion", "Usuario", FormMethod.Post, new { id = "inicioSesionForm" }))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        @if (ViewBag.ErrorMessage != null)
+                                        {
+                                            <span style="color:mediumpurple">@ViewBag.ErrorMessage</span>
+                                        }
+                                        <span asp-validation-for="Correo" style="color:mediumpurple"></span>
+                                        <div class="d-flex flex-row align-items-center mb-4">
+                                            <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                                            <div class="form-outline flex-fill mb-0">
+                                                @Html.TextBoxFor(m=>m.Correo,new{@class="form-control txtbox"})
+                                                <label class="form-label" for="correo">Correo</label>
+                                            </div>
+                                        </div>
+
+                                        <span asp-validation-for="Contrasena" style="color:mediumpurple"></span>
+                                        <div class="d-flex flex-row align-items-center mb-4">
+                                            <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                                            <div class="form-outline flex-fill mb-0">
+                                                @Html.PasswordFor(m=>m.Contrasena,new{@class="form-control txtbox"})
+                                                <label class="form-label" for="contrasena">Contraseña</label>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                                            <button type="submit" class="btn btn-primary btn-lg">Iniciar Sesión</button>
+                                        </div>
+                                        <div class="d-flex flex-column">
+                                            <p class="small mb-0 pb-lg-2"><a href="@Url.Action("ContraOlvidada", "Usuario")" class="custom-link fw-bold">Olvidaste tu Contrasena?</a></p>
+                                            <p class="small mt-0 mb-5 pb-lg-2" style="color:#7C4BC0">
+                                                No tienes cuenta? <a href="@Url.Action("Registro", "Usuario")" class="custom-link fw-bold">Registrate</a>
+                                            </p>
+                                        </div>
+
+                                    }
+                                </div>
+                                <div class="col-md-10 col-lg-6 col-xl-7 order-1 order-lg-2 d-flex align-items-center">
+                                    <img src="~/assets/images/LogoLoginRegistro.png" class="img-fluid" alt="Sample image" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="~/mdb-ui-kit/js/mdb.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</body>
+
+</html>

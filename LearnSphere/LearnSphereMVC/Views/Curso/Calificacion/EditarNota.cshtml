@@ -1,0 +1,28 @@
+﻿@model LearnSphereMVC.Models.InputModels.EditarNotaModel
+@{
+    ViewData["Title"] = "Editar Nota";
+    Layout = "~/Views/Shared/_NavbarAdmin.cshtml";
+}
+@using (Html.BeginForm("EditarNota", "Calificacion", FormMethod.Post, new { id = "registroForm", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div style="margin:30px">
+        <h1>Nueva Nota</h1>
+        <div class="form-group">
+            <label for="full_name_id" class="control-label">Nombre</label>
+            @Html.TextBoxFor(m=>m.Nota,new{@class="form-control txtbox",@id="full_name_id"})
+            <span asp-validation-for="Nota" style="color:mediumpurple"></span>
+        </div>
+        <div class="form-group">
+            <input type="hidden" value="@Model.IdCalificacion" name="IdCalificacion">
+        </div>
+        <div class="form-group">
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary">Editar Nota</button>
+        </div>
+    </div>
+}
+
+
+

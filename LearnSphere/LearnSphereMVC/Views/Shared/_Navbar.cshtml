@@ -1,0 +1,121 @@
+﻿@using System.Security.Claims;
+@{
+    var isAuthenticated = !string.IsNullOrEmpty(Context.Session.GetString("JWToken"));
+    var userEmail = "";
+    var userRol = "";
+    if (isAuthenticated)
+    {
+        var tokenHandler = new System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler();
+        var jwtToken = tokenHandler.ReadJwtToken(Context.Session.GetString("JWToken"));
+        userRol = jwtToken.Claims.First(claim => claim.Type == ClaimTypes.Role).Value;
+        userEmail = jwtToken.Claims.First(claim => claim.Type == ClaimTypes.Email).Value;
+
+    }
+}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Pagina Principal || LearnSphere || Online Education Learning</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="~/assets/images/favicons/apple-touch-icon.png">
+    <link rel="icon" type="~/image/png" sizes="32x32" href="~/assets/images/favicons/log32x32.png">
+    <link rel="icon" type="~/image/png" sizes="16x16" href="~/assets/images/favicons/log16x16.png">
+    <link rel="manifest" href="~/assets/images/favicons/site.webmanifest">
+    <!-- plugin scripts -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,500i,600,700,800%7CSatisfy&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/assets/css/animate.min.css">
+    <link rel="stylesheet" href="~/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/assets/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="~/assets/plugins/fontawesome-free-5.11.2-web/css/all.min.css">
+    <link rel="stylesheet" href="~/assets/plugins/kipso-icons/style.css">
+    <link rel="stylesheet" href="~/assets/css/magnific-popup.css">
+    <link rel="stylesheet" href="~/assets/css/vegas.min.css">
+
+    <!-- template styles -->
+    <link rel="stylesheet" href="~/assets/css/style.css">
+    <link rel="stylesheet" href="~/assets/css/responsive.css">
+</head>
+
+
+<header class="site-header site-header__header-one ">
+
+    <!-- Menu de Navegación -->
+    <nav class="navbar navbar-expand-lg navbar-light header-navigation stricky">
+        <div class="container clearfix">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="logo-box clearfix">
+                <a class="navbar-brand" href="@Url.Action("Index", "Home")">
+                    <img src="~/assets/images/LearnSphereLogo.png" class="main-logo" width="360" alt="Awesome Image" />
+                </a>
+                <button class="menu-toggler" data-target=".main-navigation">
+                    <span class="kipso-icon-menu"></span>
+                </button>
+            </div>
+            <!-- /.logo-box -->
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="main-navigation">
+                <ul class=" navigation-box">
+                    <li>
+                        <a href="@Url.Action("Index", "Home")">Inicio</a>
+                    </li>
+                    @if (isAuthenticated)
+                    {
+                        <li>
+                            <a href="@Url.Action("MisCursos", "Usuario")">Mis Cursos</a>
+                            <!-- /.sub-menu -->
+                        </li>
+                    }
+                    <li>
+                        <a href="@Url.Action("Cursos", "Curso")">Cursos</a>
+                        <!-- /.sub-menu -->
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Historia", "Home")">Historia</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- /.right-side-box -->
+        </div>
+        <!-- /.container -->
+    </nav>
+    <!-- Fin Menu de Navegación -->
+
+    <div class="site-header__decor">
+        <div class="site-header__decor-row">
+            <div class="site-header__decor-single">
+                <div class="site-header__decor-inner-3"></div>
+                <!-- /.site-header__decor-inner -->
+            </div>
+            <!-- /.site-header__decor-single -->
+            <div class="site-header__decor-single">
+                <div class="site-header__decor-inner-2"></div>
+                <!-- /.site-header__decor-inner -->
+            </div>
+            <!-- /.site-header__decor-single -->
+            <div class="site-header__decor-single">
+                <div class="site-header__decor-inner-3"></div>
+                <!-- /.site-header__decor-inner -->
+            </div>
+            <!-- /.site-header__decor-single -->
+        </div>
+        <!-- /.site-header__decor-row -->
+    </div>
+</header>
+<script src="~/mdb-ui-kit/js/mdb.min.js"></script>
+<script src="~/assets/js/jquery.min.js"></script>
+<script src="~/assets/js/bootstrap.bundle.min.js"></script>
+<script src="~/assets/js/owl.carousel.min.js"></script>
+<script src="~/assets/js/waypoints.min.js"></script>
+<script src="~/assets/js/jquery.counterup.min.js"></script>
+<script src="~/assets/js/TweenMax.min.js"></script>
+<script src="~/assets/js/wow.js"></script>
+<script src="~/assets/js/jquery.magnific-popup.min.js"></script>
+<script src="~/assets/js/countdown.min.js"></script>
+<script src="~/assets/js/vegas.min.js"></script>
+<script src="~/assets/js/jquery.validate.min.js"></script>
+<script src="~/assets/js/jquery.ajaxchimp.min.js"></script>
+
+<!-- template scripts -->

@@ -1,0 +1,55 @@
+﻿@model LearnSphereMVC.Models.InputModels.VerModuloModel
+@{
+    ViewData["Title"] = "VerModulosAdmin";
+    Layout = "~/Views/Shared/_NavbarAdmin.cshtml";
+    var contador = 0;
+}
+
+
+<!-- DataTales Example -->
+<div class="card shadow mb-4" style="margin:20px">
+    <div class="card-header py-3 bg-primary">
+        <h6 class="m-0 font-weight-bold text-white">Modulos del Curso</h6>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-12">
+                <a class="btn btn-success btn-sm" href="/Modulo/NuevoModulo/@Model.CursoId">Crear Nuevo</a>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-sm-12">
+
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="tabla" style="width:100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Modulo</th>
+                                <th>Nombre</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            
+                            @foreach (var modulo in Model.Modulos)
+                            {
+                                <tr>
+                                    <th>@(++contador)</th>
+                                    <th>@modulo.Nombre</th>
+                                    <th><a href="/Admin/VerModuloAdmin/@modulo.Id" class="btn btn-primary btn-sm">Ver Modulo</a></th>
+                                    <th><a href="/Modulo/EliminarModulo/@modulo.Id" class="btn btn-danger btn-sm">Eliminar</a></th>
+                                </tr>
+                            }
+                        </tfoot>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+

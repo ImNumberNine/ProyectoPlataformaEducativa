@@ -3,7 +3,7 @@ using LearnSphere.Models.EntityModels;
 using LearnSphere.Models.InputModels;
 using System.Security.Claims;
 
-namespace RisingSunEducationAPI.Models.InputModels
+namespace LearnSphere.Models.InputModels
 {
     public class JwtModel
     {

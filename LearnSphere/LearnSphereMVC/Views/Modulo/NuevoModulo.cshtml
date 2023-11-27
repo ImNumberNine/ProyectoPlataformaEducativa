@@ -1,0 +1,31 @@
+﻿@model LearnSphereMVC.Models.InputModels.NuevoModuloModel
+
+@{
+    ViewData["Title"] = "NuevoModulo";
+    Layout = "~/Views/Shared/_NavbarAdmin.cshtml";
+}
+
+
+@using (Html.BeginForm("NuevoModulo", "Modulo", FormMethod.Post, new { id = "registroForm" }))
+{
+    <div style="margin:30px">
+        <h1>Nuevo Modulo</h1>
+
+        <div class="form-group">
+            <label for="full_name_id" class="control-label">Nombre</label>
+            @Html.TextBoxFor(m=>m.Nombre,new{@class="form-control txtbox",@id="full_name_id"})
+            <span asp-validation-for="Nombre" style="color:mediumpurple"></span>
+        </div>
+        <div class="form-group">
+            <label for="descripcion" class="control-label">Descripcion</label>
+            @Html.TextBoxFor(m=>m.Descripcion,new{@class="form-control txtbox",@id="descripcion"})
+            <span asp-validation-for="Descripcion" style="color:mediumpurple"></span>
+        </div>
+        @Html.HiddenFor(m => m.Id_Curso, new { @Value = @Model.Id_Curso })
+        <div class="form-group">
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary">Crear</button>
+        </div>
+    </div>
+}
+

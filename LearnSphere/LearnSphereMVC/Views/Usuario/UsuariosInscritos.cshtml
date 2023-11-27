@@ -1,0 +1,44 @@
+﻿@model List<LearnSphereMVC.Models.InputModels.Usuario>
+@{
+    ViewData["Title"] = "UsuariosInscritos";
+    Layout = "~/Views/Shared/_NavbarAdmin.cshtml";
+}
+
+<!-- DataTales Example -->
+<div class="card shadow mb-4" style="margin:20px">
+    <div class="card-header py-3 bg-primary">
+        <h6 class="m-0 font-weight-bold text-white">Lista de Estudiantes</h6>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-12">
+
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="tabla" style="width:100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Correo</th>
+                                <th>Nombre</th>
+                                <th>Apellidos</th>
+                                <th>Rol</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            @foreach (var estudiante in Model)
+                            {
+                                <tr>
+                                    <th>@estudiante.Correo</th>
+                                    <th>@estudiante.Nombre</th>
+                                    <th>@estudiante.Apellidos</th>
+                                    <th>@estudiante.Rol</th>
+                                </tr>
+                            }
+                        </tfoot>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

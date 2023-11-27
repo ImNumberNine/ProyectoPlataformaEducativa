@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34202.233
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LearnSphere", "LearnSphere\LearnSphere.csproj", "{4685F892-943A-4B78-AFC7-68835F41C005}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LearnSphere", "LearnSphere\LearnSphere.csproj", "{4685F892-943A-4B78-AFC7-68835F41C005}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LearnSphereMVC", "LearnSphereMVC\LearnSphereMVC.csproj", "{CA2BE314-A82D-4DAE-B461-AC52B405E1B5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{4685F892-943A-4B78-AFC7-68835F41C005}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4685F892-943A-4B78-AFC7-68835F41C005}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4685F892-943A-4B78-AFC7-68835F41C005}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA2BE314-A82D-4DAE-B461-AC52B405E1B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA2BE314-A82D-4DAE-B461-AC52B405E1B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA2BE314-A82D-4DAE-B461-AC52B405E1B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA2BE314-A82D-4DAE-B461-AC52B405E1B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,31 @@
+﻿@model LearnSphereMVC.Models.InputModels.Archivo
+@{
+    ViewData["Title"] = "VerTareaAdmin";
+    Layout = "~/Views/Shared/_NavbarAdmin.cshtml";
+}
+
+<div style="margin:30px">
+    <h1>Detalles Tarea</h1>
+    <div class="course-details__meta">
+
+        <a href="#" class="course-details__meta-link">
+            <span class="course-details__meta-icon">
+                <!--<i class="far fa-folder-open"></i><!-- /.far fa-folder-open -->
+            </span><!-- /.course-details__icon -->
+            Nombre: <span>@Model.Nombre</span>
+        </a><!-- /.course-details__meta-link -->
+        <a href="#" class="course-details__meta-link">
+            <span class="course-details__meta-icon">
+                <!--<i class="far fa-folder-open"></i><!-- /.far fa-folder-open -->
+            </span><!-- /.course-details__icon -->
+            Descripcion: <span>@Model.Descipcion</span>
+        </a><!-- /.course-details__meta-link -->
+        <a href="@Url.Action("TareasEntregadasAdmin", "Admin",new {id=Model.Id})" class="course-details__meta-link">
+            <span class="course-details__meta-icon">
+                @*<!--<i class="far fa-user-circle"></i><!-- /.far fa-user-circle -->*@ 
+            </span><!-- /.course-details__icon -->
+            Tareas Entregadas
+        </a><!-- /.course-details__meta-link -->
+    </div><!-- /.course-details__meta -->
+</div>
+

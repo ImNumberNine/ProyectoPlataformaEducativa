@@ -1,0 +1,31 @@
+﻿@model LearnSphereMVC.Models.InputModels.Modulo
+@{
+    ViewData["Title"] = "VerModuloAdmin";
+    Layout = "~/Views/Shared/_NavbarAdmin.cshtml";
+}
+
+<div style="margin:30px">
+    <h1>Detalles Modulo</h1>
+    <div class="course-details__meta">
+        <a href="#" class="course-details__meta-link">
+            <span class="course-details__meta-icon">
+                <!--<i class="far fa-folder-open"></i><!-- /.far fa-folder-open -->
+            </span><!-- /.course-details__icon -->
+            Nombre: <span>@Model.Nombre</span>
+        </a><!-- /.course-details__meta-link -->
+        <a href="#" class="course-details__meta-link">
+            <span class="course-details__meta-icon">
+                <!--<i class="far fa-folder-open"></i><!-- /.far fa-folder-open -->
+            </span><!-- /.course-details__icon -->
+            Descripcion: <span>@Model.Descripcion</span>
+        </a><!-- /.course-details__meta-link -->
+        <a href="/Admin/VerArchivosAdmin/@Model.Id" class="course-details__meta-link">
+            <span class="course-details__meta-icon">
+                <!--<i class="far fa-folder-open"></i><!-- /.far fa-folder-open -->
+            </span><!-- /.course-details__icon -->
+            Ver Archivos
+        </a><!-- /.course-details__meta-link -->
+    </div><!-- /.course-details__meta -->
+</div>
+
+

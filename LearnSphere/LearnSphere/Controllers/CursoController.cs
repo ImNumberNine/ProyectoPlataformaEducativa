@@ -60,30 +60,6 @@ namespace LearnSphere.Controllers
             }
         }
 
-        //[HttpGet]
-        //[Route("ObtenerEstudiantesCurso")]
-        //public async Task<IActionResult> ObtenerEstudiantesCurso(string cursoId)
-        //{
-        //    try
-        //    {
-        //        // Obtener datos del curso
-        //        var curso = _contexto.Cursos.FirstOrDefault(c => c.Id == cursoId);
-        //        if (curso == null)
-        //        {
-        //            return NotFound("El curso no existe.");
-        //        }
-
-        //        // Contar cantidad de estudiantes inscritos en el curso
-        //        var cantidadEstudiantes = _contexto.In.Count(i => i.CursoId == cursoId);
-
-        //        return Ok($"El curso {curso.Nombre} tiene {cantidadEstudiantes} estudiantes inscritos.");
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return BadRequest(ex.Message);
-        //    }
-        //}
-
         [HttpGet("ObtenerCursosProfesor/{profesorId}")]
         public ActionResult<List<Curso>> ObtenerCursosProfesor(int profesorId)
         {

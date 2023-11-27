@@ -1,0 +1,277 @@
+﻿@model LearnSphereMVC.Models.InputModels.VerCursoModel
+@using System.Security.Claims;
+@{
+    var isAuthenticated = !string.IsNullOrEmpty(Context.Session.GetString("JWToken"));
+    var userEmail = "";
+    var IdUsuario = "";
+    if (isAuthenticated)
+    {
+        var tokenHandler = new System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler();
+        var jwtToken = tokenHandler.ReadJwtToken(Context.Session.GetString("JWToken"));
+        userEmail = jwtToken.Claims.First(claim => claim.Type == ClaimTypes.Email).Value;
+        IdUsuario = jwtToken.Claims.First(claim => claim.Type == ClaimTypes.NameIdentifier).Value;
+    }
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Course Details Page || Kipso || Online Education Learning & LMS HTML Template</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="~/assets/images/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="~/assets/images/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="~/assets/images/favicons/favicon-16x16.png">
+    <link rel="manifest" href="~/assets/images/favicons/site.webmanifest">
+
+    <!-- plugin scripts -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,500i,600,700,800%7CSatisfy&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/assets/css/animate.min.css">
+    <link rel="stylesheet" href="~/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/assets/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="~/assets/plugins/fontawesome-free-5.11.2-web/css/all.min.css">
+    <link rel="stylesheet" href="~/assets/plugins/kipso-icons/style.css">
+    <link rel="stylesheet" href="~/assets/css/magnific-popup.css">
+    <link rel="stylesheet" href="~/assets/css/vegas.min.css">
+
+    <!-- template styles -->
+    <link rel="stylesheet" href="~/assets/css/style.css">
+    <link rel="stylesheet" href="~/assets/css/responsive.css">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" data-rocket-async="style" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="preloader"><span></span></div><!-- /.preloader -->
+    <div class="page-wrapper">
+        <div class="topbar-one">
+            <div class="container">
+                <div class="topbar-one__left">
+                    <a href="#">needhelp@kipso.com</a>
+                    <a href="#">444 888 0000</a>
+                </div><!-- /.topbar-one__left -->
+                <div class="topbar-one__right">
+                    @if (isAuthenticated)
+                    {
+                        <a href="/Usuario/Perfil">@userEmail</a>
+                        <a href="/Usuario/CerrarSesion">Cerrar Sesión</a>
+                    }
+                    else
+                    {
+                        <a href="/Usuario/InicioSesion">Iniciar Sesión</a>
+                        <a href="/Usuario/Registro">Registrarse</a>
+                    }
+                </div>
+            </div><!-- /.container -->
+        </div><!-- /.topbar-one -->
+        <header class="site-header site-header__header-one ">
+            @Html.Partial("_Navbar")
+        </header>
+        <section class="inner-banner">
+            <div class="container">
+                <ul class="list-unstyled thm-breadcrumb">
+                    <li><a href="#">Home</a></li>
+                    <li class="active"><a href="#">Course Details</a></li>
+                </ul><!-- /.list-unstyled -->
+                <h2 class="inner-banner_title">Course Details</h2><!-- /.inner-banner_title -->
+            </div><!-- /.container -->
+        </section><!-- /.inner-banner -->
+        <section class="course-details">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="course-details__content">
+                            <div class="course-details__top">
+                                <div class="course-details__top-left">
+                                    <h2 class="course-details__title">@Model.Curso.NombreCurso</h2>
+                                    <!-- /.course-details__title -->
+
+                                </div><!-- /.course-details__top-left -->
+
+                            </div><!-- /.course-details__top -->
+                            <div class="course-one__image">
+                                <img src="~/assets/ImagenesCursos/@Model.Curso.Imagen" alt="@Model.Curso.NombreCurso">
+                                <i class="far fa-heart"></i><!-- /.far fa-heart -->
+                            </div><!-- /.course-one__image -->
+
+                            <ul class="course-details__tab-navs list-unstyled nav nav-tabs" role="tablist">
+                                <li>
+                                    <a class="" role="tab" data-toggle="tab" href="#overview">Descripcion</a>
+                                </li>
+                                <li>
+                                    <a class="" role="tab" data-toggle="tab" href="#curriculum">Modulos</a>
+                                </li>
+                                <li>
+                                    <a class="" role="tab" data-toggle="tab" href="#comentarios">Comentarios</a>
+                                </li>
+
+                            </ul><!-- /.course-details__tab-navs list-unstyled -->
+                            <div class="tab-content course-details__tab-content ">
+                                <div class="tab-pane show active  animated fadeInUp" role="tabpanel" id="overview">
+                                    <p class="course-details__tab-text">
+                                        @Model.Curso.Descripcion
+                                    </p><!-- /.course-details__tab-text -->
+
+                                </div><!-- /.course-details__tab-content -->
+                                <div class="tab-pane  animated fadeInUp" role="tabpanel" id="curriculum">
+
+                                    <ul class="course-details__curriculum-list list-unstyled">
+                                        @if (Model.Inscripcion == false)
+                                        {
+                                            @foreach (var modulo in Model.Modulo.Modulos)
+                                            {
+                                                <li>
+                                                    <div class="course-details__curriculum-list-left">
+                                                        <div class="course-details__meta-icon file-icon">
+                                                            <i class="fas fa-folder"></i><!-- /.far fa-folder -->
+                                                        </div><!-- /.course-details__icon -->
+                                                        <p>@modulo.Nombre</p>
+                                                    </div><!-- /.course-details__curriculum-list-left -->
+                                                    <!-- /.course-details__curriculum-list-right -->
+                                                </li>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            @foreach (var modulo in Model.Modulo.Modulos)
+                                            {
+                                                <li>
+                                                    <div class="course-details__curriculum-list-left">
+                                                        <div class="course-details__meta-icon file-icon">
+                                                            <i class="fas fa-folder"></i><!-- /.far fa-folder -->
+                                                        </div><!-- /.course-details__icon -->
+                                                        <a href="/Modulo/VerModulo/@modulo.Id">@modulo.Nombre</a>
+                                                    </div><!-- /.course-details__curriculum-list-left -->
+                                                    <!-- /.course-details__curriculum-list-right -->
+                                                </li>
+                                            }
+                                        }
+                                    </ul><!-- /.course-details__curriculum-list -->
+                                </div><!-- /.course-details__tab-content -->
+                                <div class="tab-pane  animated fadeInUp" role="tabpanel" id="comentarios">
+                                    @if (Model.Opiniones != null && Model.Opiniones.Any())
+                                    {
+                                        <ul class="course-details__curriculum-list list-unstyled">
+                                            @foreach (var opinion in Model.Opiniones)
+                                            {
+                                                <div class="course-details__comment-single">
+                                                    <div class="course-details__comment-top">
+                                                        <div class="course-details__comment-right">
+                                                            <h2 class="course-details__comment-name">@opinion.Autor</h2>
+                                                            <div class="course-details__comment-meta">
+                                                                <p class="course-details__comment-date">@opinion.Titulo</p>
+                                                            </div><!-- /.course-details__comment-meta -->
+                                                        </div><!-- /.course-details__comment-right -->
+                                                    </div><!-- /.course-details__comment-top -->
+                                                    <p class="course-details__comment-text">@opinion.Descripcion</p>
+                                                </div>
+
+                                                <!-- /.course-details__comment-single -->
+                                            }
+                                        </ul>
+
+                                        <!-- /.course-details__curriculum-list -->
+                                    }
+                                    else
+                                    {
+                                        <p>No hay comentarios disponibles para este curso.</p>
+                                    }
+                                </div><!-- /.course-details__tab-content -->
+                            </div><!-- /.tab-content -->
+                        </div><!-- /.course-details__content -->
+                    </div><!-- /.col-lg-8 -->
+                    <div class="col-lg-4">
+                        <div class="course-details__price">
+                            @if (!Model.Inscripcion)
+                            {
+                                if (isAuthenticated)
+                                {
+                                    <a href="@Url.Action("NuevaInscripcion", "Inscripcion", new { usuarioId = IdUsuario, cursoId = Model.Curso.Id })" class="thm-btn course-details__price-btn">Inscribirse</a>
+                                }
+                                else
+                                {
+                                   
+                                    <a href="@Url.Action("InicioSesion", "Usuario")" class="thm-btn course-details__price-btn">Inicie Sesion para inscribirse</a>
+                                }
+                            }
+                            else
+                            {
+                                <p>Inscrito, Disfrute del material!</p>
+                            }
+
+                        </div><!-- /.course-details__price -->
+
+                        <div class="course-details__meta">
+
+                            <a href="#" class="course-details__meta-link">
+                                <span class="course-details__meta-icon">
+                                    <i class="far fa-folder-open"></i><!-- /.far fa-folder-open -->
+                                </span><!-- /.course-details__icon -->
+                                Modulos: <span>@Model.Modulo.CantidadModulos</span>
+                            </a><!-- /.course-details__meta-link -->
+                            <a href="#" class="course-details__meta-link">
+                                <span class="course-details__meta-icon">
+                                    <i class="far fa-user-circle"></i><!-- /.far fa-user-circle -->
+                                </span><!-- /.course-details__icon -->
+                                Estudiantes: @Model.Estudiantes</span>
+                            </a><!-- /.course-details__meta-link -->
+                            <a href="#" class="course-details__meta-link">
+                                <span class="course-details__meta-icon">
+                                    <i class="far fa-flag"></i><!-- /.far fa-flag -->
+                                </span><!-- /.course-details__icon -->
+                                Nivel: <span>@Model.Curso.Nivel</span>
+                            </a><!-- /.course-details__meta-link -->
+                        </div><!-- /.course-details__meta -->
+
+                        <div class="course-details__list">
+                            <h2 class="course-details_list-title">Otros cursos</h2><!-- /.course-details_list-title -->
+                            @foreach (var curso in Model.Cursos)
+                            {
+                                <div class="course-details__list-item">
+                                    <div class="course-details__list-img">
+                                        <img src="~/assets/ImagenesCursos/@curso.Imagen" alt="">
+                                    </div><!-- /.course-details__list-img -->
+                                    <div class="course-details__list-content">
+                                        <a class="course-details__list-author" href="/Curso/VerCurso/@curso.Id">@curso.NombreCurso</a>
+                                    </div><!-- /.course-details__list-content -->
+                                </div>
+
+                                <!-- /.course-details__list-item -->
+                            }
+                        </div>
+
+                        <!-- /.course-details__list-item -->
+
+                    </div><!-- /.course-details__list -->
+
+
+                </div><!-- /.col-lg-4 -->
+
+            </div><!-- /.container -->
+        </section><!-- /.course-details -->
+    </div><!-- /.page-wrapper -->
+    <script src="~/assets/js/jquery.min.js"></script>
+    <script src="~/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="~/assets/js/owl.carousel.min.js"></script>
+    <script src="~/assets/js/waypoints.min.js"></script>
+    <script src="~/assets/js/jquery.counterup.min.js"></script>
+    <script src="~/assets/js/TweenMax.min.js"></script>
+    <script src="~/assets/js/wow.js"></script>
+    <script src="~/assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/assets/js/countdown.min.js"></script>
+    <script src="~/assets/js/vegas.min.js"></script>
+    <script src="~/assets/js/jquery.validate.min.js"></script>
+    <script src="~/assets/js/jquery.ajaxchimp.min.js"></script>
+
+    <!-- template scripts -->
+    <script src="~/assets/js/theme.js"></script>
+</body>
+
+</html>
+

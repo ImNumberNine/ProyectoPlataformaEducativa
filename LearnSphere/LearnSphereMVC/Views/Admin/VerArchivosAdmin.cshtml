@@ -1,0 +1,88 @@
+﻿@model LearnSphereMVC.Models.InputModels.VerArchivosModel
+@{
+    ViewData["Title"] = "VerArchivosAdmin";
+    Layout = "~/Views/Shared/_NavbarAdmin.cshtml";
+}
+
+<!-- DataTales Example -->
+<div class="card shadow mb-4" style="margin:20px">
+    <div class="card-header py-3 bg-primary">
+        <h6 class="m-0 font-weight-bold text-white">Archivos</h6>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-12">
+                <a class="btn btn-success btn-sm" href="#" data-toggle="modal" data-target="#crearArchivo">Crear Nuevo</a>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-sm-12">
+
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="tabla" style="width:100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Categoria</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+
+                            @foreach (var archivo in Model.Archivos)
+                            {
+                                <tr>
+
+                                    <th>@archivo.Nombre</th>
+                                    <th>@archivo.Categoria</th>
+                                    @if (archivo.Categoria == "Link")
+                                    {
+                                        <th><a href="@archivo.Link" class="btn btn-primary btn-sm">Ver</a></th>
+                                    }
+                                    else if (archivo.Categoria == "Archivo")
+                                    {
+                                        <th><a href="/Archivo/VerTarea/@archivo.Id" class="btn btn-primary btn-sm">Ver</a></th>
+                                    }
+                                    else if (archivo.Categoria == "Tarea")
+                                    {
+                                        <th><a href="/Archivo/VerTarea/@archivo.Id" class="btn btn-primary btn-sm">Ver</a></th>
+                                    }
+                                    
+                                    <th><a href="/Archivo/EliminarArchivo/@archivo.Id" class="btn btn-danger btn-sm">Eliminar</a></th>
+
+                                </tr>
+                            }
+                        </tfoot>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Logout Modal-->
+<div class="modal fade" id="crearArchivo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Que tipo de archivo desear subir?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Que tipo de archivo desear subir?</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+               
+                <a href="@Url.Action("NuevoArchivo", "Archivo", new { id = Model.ModuloId })" class="btn btn-primary">Documento PDF</a>
+                <a href="@Url.Action("NuevoLink", "Archivo",new {id=Model.ModuloId})" class="btn btn-primary">Link</a>
+                <a href="@Url.Action("NuevaTarea", "Archivo",new {id=Model.ModuloId})" class="btn btn-primary">Agregar Tarea</a>
+            </div>
+        </div>
+    </div>
+</div>
+

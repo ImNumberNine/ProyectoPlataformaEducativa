@@ -9,7 +9,7 @@ namespace LearnSphere.Models.EntityModels
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        public DateTime Fecha_incripcion { get; set; }
+        public DateTime Fecha_Inscripcion { get; set; }
        
       
         public string Id_Curso { get; set; }

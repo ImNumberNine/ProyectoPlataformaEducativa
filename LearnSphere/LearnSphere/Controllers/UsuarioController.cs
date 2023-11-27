@@ -131,7 +131,7 @@ namespace LearnSphere.Controllers
             };
             _contexto.Usuarios.Add(usuario);
             await _contexto.SaveChangesAsync();
-            string verificationLink =  $"https://localhost:7105/Usuario/UsuarioVerificado?token={TokenVerificacion}";
+            string verificationLink =  $"https://localhost:7182/Usuario/UsuarioVerificado?token={TokenVerificacion}";
             Email email =
              new Email//Enviar Correo
              {
@@ -191,7 +191,7 @@ namespace LearnSphere.Controllers
             usuario.ContrasenaResetToken = CreacionRandomToken();
             usuario.ExpiraToken = DateTime.Now.AddDays(1);
             await _contexto.SaveChangesAsync();
-            string verificationLink = $"https://localhost:7105/Usuario/RestablecerContrasena?token={usuario.ContrasenaResetToken}";
+            string verificationLink = $"https://localhost:7182/Usuario/RestablecerContrasena?token={usuario.ContrasenaResetToken}";
             Email email =//Enviar Correo
               new Email
               {

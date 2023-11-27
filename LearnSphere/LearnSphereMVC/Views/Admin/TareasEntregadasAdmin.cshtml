@@ -1,0 +1,65 @@
+﻿@model List<LearnSphereMVC.Models.InputModels.CalificacionesAdminModel>
+@{
+    ViewData["Title"] = "TareasEntregadasAdmin";
+    Layout = "~/Views/Shared/_NavbarAdmin.cshtml";
+}
+
+
+<!-- DataTales Example -->
+<div class="card shadow mb-4" style="margin:20px">
+    <div class="card-header py-3 bg-primary">
+        <h6 class="m-0 font-weight-bold text-white">Tareas Entregadas</h6>
+    </div>
+    <div class="card-body">
+        <div class="row">
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-sm-12">
+
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="tabla" style="width:100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Nombre Completo</th>
+                                <th>Correo</th>
+                                <th>Calificacion</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            @foreach (var entrega in Model)
+                            {
+                                <tr>
+                                    <th>@entrega.Estudiante.Nombre @entrega.Estudiante.Apellidos</th>
+                                    <th>@entrega.Estudiante.Correo</th>
+                                    @if (@entrega.Calificacion.NotaArchivo == 0)
+                                    {
+                                        <th>Pendiente</th>
+                                    }
+                                    else
+                                    {
+                                        <th>@entrega.Calificacion.NotaArchivo</th>
+                                    }
+                                    <th>
+                                        <form asp-controller="Calificacion" asp-action="VerCalificacion" method="post">
+                                            <input type="hidden" name="id" value="@entrega.Calificacion.Id">
+                                            <button type="submit" class="btn btn-primary btn-sm">Descargar archivo ZIP</button>
+                                        </form>
+                                    </th>
+                                    <th><a href="/Calificacion/EditarNota/@entrega.Calificacion.Id" class="btn btn-info btn-sm">Editar Nota</a></th>
+                                </tr>
+                            }
+                        </tfoot>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+

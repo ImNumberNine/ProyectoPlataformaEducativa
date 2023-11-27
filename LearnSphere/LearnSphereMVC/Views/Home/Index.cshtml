@@ -1,0 +1,325 @@
+﻿@model List<LearnSphereMVC.Models.InputModels.Curso>
+@{
+
+    Layout = "_Layout";
+}
+@using System.Security.Claims;
+@{
+    var isAuthenticated = !string.IsNullOrEmpty(Context.Session.GetString("JWToken"));
+    var userEmail = "";
+    if (isAuthenticated)
+    {
+        var tokenHandler = new System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler();
+        var jwtToken = tokenHandler.ReadJwtToken(Context.Session.GetString("JWToken"));
+        userEmail = jwtToken.Claims.First(claim => claim.Type == ClaimTypes.Email).Value;
+    }
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Cuerpo de la pagina -->
+
+<body>
+    <div class="preloader"><span></span></div>
+    <!-- /.preloader -->
+    <div class="page-wrapper">
+        <div class="topbar-one">
+            <!-- Información Inicial -->
+            <div class="container">
+                <div class="topbar-one__left">
+                    <a href="#">LearnSphere@Sphere.com</a>
+                    <a href="#">2222-4444</a>
+                </div>
+                <!-- /.topbar-one__left -->
+                <div class="topbar-one__right">
+                    @if (isAuthenticated)
+                    {
+                        <a href="/Usuario/Perfil">@userEmail</a>
+                        <a href="/Usuario/CerrarSesion">Cerrar Sesión</a>
+                    }
+                    else
+                    {
+                        <a href="/Usuario/InicioSesion">Iniciar Sesión</a>
+                        <a href="/Usuario/Registro">Registrarse</a>
+                    }
+                </div>
+                <!-- /.topbar-one__right -->
+            </div>
+            <!-- /.container -->
+            <!-- Fin Información Inicial -->
+        </div>
+        <!-- /.topbar-one -->
+        <header class="site-header site-header__header-one ">
+
+            @Html.Partial("_Navbar")
+
+            <div class="site-header__decor">
+                <div class="site-header__decor-row">
+                    <div class="site-header__decor-single">
+                        <div class="site-header__decor-inner-3"></div>
+                        <!-- /.site-header__decor-inner -->
+                    </div>
+                    <!-- /.site-header__decor-single -->
+                    <div class="site-header__decor-single">
+                        <div class="site-header__decor-inner-2"></div>
+                        <!-- /.site-header__decor-inner -->
+                    </div>
+                    <!-- /.site-header__decor-single -->
+                    <div class="site-header__decor-single">
+                        <div class="site-header__decor-inner-3"></div>
+                        <!-- /.site-header__decor-inner -->
+                    </div>
+                    <!-- /.site-header__decor-single -->
+                </div>
+                <!-- /.site-header__decor-row -->
+            </div>
+        </header>
+        <!-- /.site-header -->
+
+        <div class="banner-wrapper">
+            <section class="banner-one banner-carousel__one no-dots owl-theme owl-carousel">
+                <div class="banner-one__slide banner-one__slide-one">
+                    <div class="container">
+                        <div class="banner-one__bubble-1"></div>
+                        <!-- /.banner-one__bubble- -->
+                        <div class="banner-one__bubble-2"></div>
+                        <!-- /.banner-one__bubble- -->
+                        <div class="banner-one__bubble-3"></div>
+                        <!-- /.banner-one__bubble- -->
+                        <img src="assets/images/slider-1-scratch.png" alt="" class="banner-one__scratch">
+                        <!--<img src="assets/images/slider-1-person-1.png" class="banner-one__person" alt="">-->
+                        <div class="row no-gutters">
+                            <div class="col-xl-12">
+                                <h3 class="banner-one__title banner-one__light-color">Aprende<br> Lo último en Programación</h3>
+                                <!-- /.banner-one__title -->
+                                <p class="banner-one__tag-line">Estas listo para aprender?</p>
+                                <!-- /.banner-one__tag-line -->
+                                <a href="/Curso/Cursos" class="thm-btn banner-one__btn">Aprender</a>
+                            </div>
+                            <!-- /.col-xl-12 -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.container -->
+                </div>
+                <!-- /.banner-one__slide -->
+                <div class="banner-one__slide banner-one__slide-two">
+                    <div class="container">
+                        <div class="banner-one__bubble-1"></div>
+                        <!-- /.banner-one__bubble- -->
+                        <div class="banner-one__bubble-2"></div>
+                        <!-- /.banner-one__bubble- -->
+                        <div class="banner-one__bubble-3"></div>
+                        <!-- /.banner-one__bubble- -->
+                        <img src="assets/images/slider-1-scratch.png" alt="" class="banner-one__scratch">
+                        <!--<img src="assets/images/slider-1-person-2.png" class="banner-one__person" alt="">-->
+                        <div class="row no-gutters">
+                            <div class="col-xl-12">
+                                <h3 class="banner-one__title banner-one__light-color">Nosotros <br> Te enseñamos</h3>
+                                <!-- /.banner-one__title -->
+                                <p class="banner-one__tag-line">Estas listo para aprender?</p>
+                                <!-- /.banner-one__tag-line -->
+                                <a href="/Curso/Cursos" class="thm-btn banner-one__btn">Aprender</a>
+                            </div>
+                            <!-- /.col-xl-12 -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.container -->
+                </div>
+                <!-- /.banner-one__slide -->
+            </section>
+            <!-- /.banner-one -->
+            <div class="banner-carousel-btn">
+                <a href="#" class="banner-carousel-btn__left-btn"><i class="kipso-icon-left-arrow"></i></a>
+                <a href="#" class="banner-carousel-btn__right-btn"><i class="kipso-icon-right-arrow"></i></a>
+            </div>
+            <!-- /.banner-carousel-btn -->
+
+            <!-- /.banner-one__cta -->
+        </div>
+        <!-- /.banner-wrapper -->
+        <section class="about-two">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-6">
+                        <div class="about-two__content">
+                            <div class="block-title text-left">
+                                <h2 class="block-title__title">
+                                    Bienvenido a LearnSphere <br>
+                                </h2>
+                                <!-- /.block-title__title -->
+                            </div>
+                            <!-- /.block-title -->
+                            <p class="about-two__text">Somos una empresa netamente costarricense con 35 años de trayectoria en el campo de la decoración e incursionando en el area de la educación tecnologica. Por medio de las plataformas en linea, con enfasis en niños y adoslescentes.</p>
+                            <!-- /.about-two__text -->
+                            <div class="about-two__single-wrap">
+                                <div class="about-two__single">
+                                    <div class="about-two__single-icon">
+                                        <i class="kipso-icon-professor"></i>
+                                        <!-- /.kipso-icon-professor -->
+                                    </div>
+                                    <!-- /.about-two__single-icon -->
+                                    <div class="about-two__single-content">
+                                        <p class="about-two__single-text">
+                                            Aprende de nuestro equipo de Profesores expertos
+                                        </p>
+                                        <!-- /.about-two__single-text -->
+                                    </div>
+                                    <!-- /.about-two__single-content -->
+                                </div>
+                                <!-- /.about-two__single -->
+                                <div class="about-two__single">
+                                    <div class="about-two__single-icon">
+                                        <i class="kipso-icon-knowledge"></i>
+                                        <!-- /.kipso-icon-professor -->
+                                    </div>
+                                    <!-- /.about-two__single-icon -->
+                                    <div class="about-two__single-content">
+                                        <p class="about-two__single-text">Mejora tus habilidades con nosotros</p>
+                                        <!-- /.about-two__single-text -->
+                                    </div>
+                                    <!-- /.about-two__single-content -->
+                                </div>
+                                <!-- /.about-two__single -->
+                            </div>
+                            <!-- /.about-two__single-wrap -->
+                            <a href="/Home/Historia" class="thm-btn">Descubrir más</a>
+                            <!-- /.thm-btn -->
+                        </div>
+                        <!-- /.about-two__content -->
+                    </div>
+                    <!-- /.col-lg-6 -->
+                    <div class="col-xl-6 d-flex justify-content-xl-end justify-content-sm-center">
+                        <div class="about-two__image">
+                            <span class="about-two__image-dots"></span>
+                            <!-- /.about-two__image-dots -->
+                            <img src="assets/images/Papoa512x512.png" alt="">
+                            <div class="about-two__count">
+                                <div class="about-two__count-text">
+                                    Trusted by
+                                    <span class="counter">4890</span>
+                                </div>
+                                <!-- /.about-two__count-text -->
+                            </div>
+                            <!-- /.about-two__count -->
+                        </div>
+                        <!-- /.about-two__image -->
+                    </div>
+                    <!-- /.col-lg-6 -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container -->
+        </section>
+        <!-- /.about-two -->
+        <section class="course-one__top-title home-one">
+            <div class="container">
+                <div class="block-title mb-0">
+                    <h2 class="block-title__title">Explore <br> nuestros cursos más populares</h2>
+                    <!-- /.block-title__title -->
+                </div>
+                <!-- /.block-title -->
+            </div>
+            <!-- /.container -->
+            <div class="course-one__top-title__curve"></div>
+            <!-- /.course-one__top-title__curve -->
+        </section>
+        <!-- /.course-one__top-title -->
+
+        <section class="course-one course-one__teacher-details home-one">
+            <div class="container">
+                <div class="course-one__carousel owl-carousel owl-theme">
+
+
+
+
+                    @foreach (var curso in Model)
+                    {
+
+
+                        <div class="course-one__single">
+
+                            <div class="course-one__image">
+                                <img src="~/assets/ImagenesCursos/@curso.Imagen" alt="">
+                            </div>
+                            <!-- /.course-one__image -->
+                            <div class="course-one__content">
+                                <a href="#" class="course-one__category">@curso.Nivel</a>
+                                <!-- /.course-one__category -->
+                                <!-- /.course-one__admin -->
+                                <h2 class="course-one__title"><a href="course-details.html">@curso.NombreCurso</a></h2>
+                                <!-- /.course-one__title -->
+
+                                <a href="#" class="course-one__link">Previsualizar</a>
+                                <!-- /.course-one__link -->
+                            </div>
+
+                            <!-- /.course-one__content -->
+                        </div>
+                        <!-- /.course-one__single -->
+                    }
+
+
+                </div>
+                <!-- /.course-one__carousel -->
+            </div>
+            <!-- /.container -->
+        </section>
+        <!-- /.course-one course-page -->
+        <!-- /.course-one course-page -->
+
+
+        <footer class="site-footer">
+            <div class="site-footer__bottom">
+                <div class="container">
+                    <p class="site-footer__copy">&copy; Copyright 2023 by <a href="#">LearnSphere</a></p>
+
+                    <!-- /.site-footer__copy -->
+                </div>
+                <!-- /.container -->
+            </div>
+            <!-- /.site-footer__bottom -->
+        </footer>
+        <!-- /.site-footer -->
+
+    </div>
+    <!-- /.page-wrapper -->
+
+    <div class="search-popup">
+        <div class="search-popup__overlay custom-cursor__overlay">
+            <div class="cursor"></div>
+            <div class="cursor-follower"></div>
+        </div>
+        <!-- /.search-popup__overlay -->
+        <div class="search-popup__inner">
+            <form action="#" class="search-popup__form">
+                <input type="text" name="search" placeholder="Type here to Search....">
+                <button type="submit"><i class="kipso-icon-magnifying-glass"></i></button>
+            </form>
+        </div>
+        <!-- /.search-popup__inner -->
+    </div>
+    <!-- /.search-popup -->
+
+    <script src="~/assets/js/jquery.min.js"></script>
+    <script src="~/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="~/assets/js/owl.carousel.min.js"></script>
+    <script src="~/assets/js/waypoints.min.js"></script>
+    <script src="~/assets/js/jquery.counterup.min.js"></script>
+    <script src="~/assets/js/TweenMax.min.js"></script>
+    <script src="~/assets/js/wow.js"></script>
+    <script src="~/assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/assets/js/countdown.min.js"></script>
+    <script src="~/assets/js/vegas.min.js"></script>
+    <script src="~/assets/js/jquery.validate.min.js"></script>
+    <script src="~/assets/js/jquery.ajaxchimp.min.js"></script>
+
+    <!-- template scripts -->
+    <script src="~/assets/js/theme.js"></script>
+</body>
+
+</html>

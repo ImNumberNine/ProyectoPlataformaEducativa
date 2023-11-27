@@ -1,0 +1,47 @@
+﻿@model LearnSphereMVC.Models.InputModels.Curso
+@{
+    ViewData["Title"] = "VerCursoAdmin";
+    Layout = "~/Views/Shared/_NavbarAdmin.cshtml";
+}
+
+<div style="margin:30px">
+    <h1>Detalles Curso</h1>
+    <div class="course-details__meta">
+        <a href="#" class="course-details__meta-link">
+            <span class="course-details__meta-icon">
+                <!--<i class="far fa-folder-open"></i><!-- /.far fa-folder-open -->
+            </span><!-- /.course-details__icon -->
+            Codigo: <span>@Model.Id</span>
+        </a><!-- /.course-details__meta-link -->
+        <a href="#" class="course-details__meta-link">
+            <span class="course-details__meta-icon">
+                <!--<i class="far fa-folder-open"></i><!-- /.far fa-folder-open -->
+            </span><!-- /.course-details__icon -->
+            Nombre: <span>@Model.NombreCurso</span>
+        </a><!-- /.course-details__meta-link -->
+        <a href="#" class="course-details__meta-link">
+            <span class="course-details__meta-icon">
+                <!--<i class="far fa-folder-open"></i><!-- /.far fa-folder-open -->
+            </span><!-- /.course-details__icon -->
+            Descripcion: <span>@Model.Descripcion</span>
+        </a><!-- /.course-details__meta-link -->
+        <a href="#" class="course-details__meta-link">
+            <span class="course-details__meta-icon">
+                <!--<i class="far fa-flag"></i><!-- /.far fa-flag -->
+            </span><!-- /.course-details__icon -->
+            Nivel: <span>@Model.Nivel</span>
+        </a><!-- /.course-details__meta-link -->
+        <a href="/Admin/VerModulosAdmin/@Model.Id" class="course-details__meta-link">
+            <span class="course-details__meta-icon">
+                <!--<i class="far fa-folder-open"></i><!-- /.far fa-folder-open -->
+            </span><!-- /.course-details__icon -->
+            Ver Modulos
+        </a><!-- /.course-details__meta-link -->
+        <a href="@Url.Action("UsuariosInscritos", "Usuario", new { cursoId = Model.Id })" class="course-details__meta-link">
+            <span class="course-details__meta-icon">
+                <!--<i class="far fa-user-circle"></i><!-- /.far fa-user-circle -->
+            </span><!-- /.course-details__icon -->
+            Ver estudiantes inscritos
+        </a><!-- /.course-details__meta-link -->
+    </div><!-- /.course-details__meta -->
+</div>

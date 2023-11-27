@@ -1,0 +1,127 @@
+﻿@model List<LearnSphereMVC.Models.InputModels.Curso>
+@using System.Security.Claims;
+@{
+    var isAuthenticated = !string.IsNullOrEmpty(Context.Session.GetString("JWToken"));
+    var userEmail = "";
+    if (isAuthenticated)
+    {
+        var tokenHandler = new System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler();
+        var jwtToken = tokenHandler.ReadJwtToken(Context.Session.GetString("JWToken"));
+        userEmail = jwtToken.Claims.First(claim => claim.Type == ClaimTypes.Email).Value;
+    }
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Pagina Principal || Rising Sun Education || Educaci�n Tecnol�gica L�nea</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="~/assets/images/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="~/assets/images/favicons/log32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="~/assets/images/favicons/log16x16.png">
+    <link rel="manifest" href="~/assets/images/favicons/site.webmanifest">
+
+    <!-- plugin scripts -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,500i,600,700,800%7CSatisfy&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/assets/css/animate.min.css">
+    <link rel="stylesheet" href="~/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/assets/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="~/assets/plugins/fontawesome-free-5.11.2-web/css/all.min.css">
+    <link rel="stylesheet" href="~/assets/plugins/kipso-icons/style.css">
+    <link rel="stylesheet" href="~/assets/css/magnific-popup.css">
+    <link rel="stylesheet" href="~/assets/css/vegas.min.css">
+
+    <!-- template styles -->
+    <link rel="stylesheet" href="~/assets/css/style.css">
+    <link rel="stylesheet" href="~/assets/css/responsive.css">
+</head>
+
+<body>
+    <div class="preloader"><span></span></div>
+    <!-- /.preloader -->
+   
+        <div class="topbar-one">
+            <!-- Información Inicial -->
+            <div class="container">
+                <div class="topbar-one__left">
+                    <a href="#">risingenlinea@solnaciente.com</a>
+                    <a href="#">2293-0808</a>
+                </div>
+                <!-- /.topbar-one__left -->
+                <div class="topbar-one__right">
+                    @if (isAuthenticated)
+                    {
+                        <a href="/Usuario/Perfil">@userEmail</a>
+                        <a href="/Usuario/CerrarSesion">Cerrar Sesión</a>
+                    }
+                    else
+                    {
+                        <a href="/Usuario/InicioSesion">Iniciar Sesión</a>
+                        <a href="/Usuario/Registro">Registrarse</a>
+                    }
+                </div>
+                <!-- /.topbar-one__right -->
+            </div>
+            <!-- /.container -->
+            <!-- Fin Información Inicial -->
+        </div>
+
+        <header class="site-header site-header__header-one ">
+            @Html.Partial("_Navbar")
+        </header>
+        <section class="inner-banner">
+            <div class="container">
+                <ul class="list-unstyled thm-breadcrumb">
+                    <li><a href="#">Inicio</a></li>
+                </ul><!-- /.list-unstyled -->
+                <h2 class="inner-banner__title">Cursos</h2><!-- /.inner-banner__title -->
+            </div>
+        </section><!-- /.inner-banner -->
+        <div class="container" style="margin-top:20px">
+            <div class="row">
+                @foreach (var curso in Model)
+                {
+                    <div class="col-lg-4">
+                        <div class="course-one__single">
+                            <div class="course-one__image" style="width:fit-content;height:fit-content">
+                                <img src="~/assets/ImagenesCursos/@curso.Imagen" alt="@curso.NombreCurso">
+
+                            </div><!-- /.course-one__image -->
+                            <div class="course-one__content">
+                                <a href="#" class="course-one__category">@curso.Nivel</a>
+                                <h2 class="course-one__title"><a href="course-details.html">@curso.NombreCurso</a></h2>
+                                <!-- /.course-one__title -->
+
+                                <a href="/Curso/VerCurso/@curso.Id" class="course-one__link">Seguir Aprendiendo</a><!-- /.course-one__link -->
+                                <!-- /.course-one__link -->
+                            </div>
+
+                            <!-- /.course-one__content -->
+
+                        </div><!-- /.course-one__content -->
+                    </div>
+
+                    <!-- /.course-one__single -->
+                    <!-- /.col-lg-4 -->
+                }
+            </div><!-- /.row -->
+        </div><!-- /.container -->
+        <script src="~/assets/js/jquery.min.js"></script>
+        <script src="~/assets/js/bootstrap.bundle.min.js"></script>
+        <script src="~/assets/js/owl.carousel.min.js"></script>
+        <script src="~/assets/js/waypoints.min.js"></script>
+        <script src="~/assets/js/jquery.counterup.min.js"></script>
+        <script src="~/assets/js/TweenMax.min.js"></script>
+        <script src="~/assets/js/wow.js"></script>
+        <script src="~/assets/js/jquery.magnific-popup.min.js"></script>
+        <script src="~/assets/js/countdown.min.js"></script>
+        <script src="~/assets/js/vegas.min.js"></script>
+        <script src="~/assets/js/jquery.validate.min.js"></script>
+        <script src="~/assets/js/jquery.ajaxchimp.min.js"></script>
+        <!-- template scripts -->
+        <script src="~/assets/js/theme.js"></script>
+</body>
+</html>

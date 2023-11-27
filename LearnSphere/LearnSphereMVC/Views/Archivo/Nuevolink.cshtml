@@ -1,0 +1,39 @@
+﻿@model LearnSphereMVC.Models.InputModels.ArchivoModel
+@{
+    ViewData["Title"] = "Nuevolink";
+    Layout = "~/Views/Shared/_NavbarAdmin.cshtml";
+}
+
+
+@using (Html.BeginForm("NuevoLink", "Archivo", FormMethod.Post, new { id = "registroForm", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <span style="color:mediumpurple">@ViewBag.ErrorMessage</span>
+    }
+    <div style="margin:30px">
+        <h1>Nuevo Archivo</h1>
+        <div class="form-group">
+            <label for="full_name_id" class="control-label">Nombre</label>
+            @Html.TextBoxFor(m=>m.Nombre,new{@class="form-control txtbox",@id="full_name_id"})
+            <span asp-validation-for="Nombre" style="color:mediumpurple"></span>
+        </div>
+        <div class="form-group">
+            <label for="link" class="control-label">Link</label>
+            @Html.TextBoxFor(m=>m.Link,new{@class="form-control txtbox",@id="link"})
+            <span asp-validation-for="Link" style="color:mediumpurple"></span>
+        </div>
+        <div class="form-group">
+            <input type="hidden" value="@Model.Id_modulo" name="Id_Modulo">
+        </div>
+        <div class="form-group">
+            <input type="hidden" value="Link" name="Categoria">
+        </div>
+        <div class="form-group">
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary">Crear</button>
+        </div>
+    </div>
+}
+
