@@ -12,40 +12,14 @@
         IdUsuario = jwtToken.Claims.First(claim => claim.Type == ClaimTypes.NameIdentifier).Value;
     }
 }
+@{
 
+    Layout = "_Layout";
+}
 
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Course Details Page || Kipso || Online Education Learning & LMS HTML Template</title>
-    <link rel="apple-touch-icon" sizes="180x180" href="~/assets/images/favicons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="~/assets/images/favicons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="~/assets/images/favicons/favicon-16x16.png">
-    <link rel="manifest" href="~/assets/images/favicons/site.webmanifest">
-
-    <!-- plugin scripts -->
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,500i,600,700,800%7CSatisfy&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="~/assets/css/animate.min.css">
-    <link rel="stylesheet" href="~/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="~/assets/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="~/assets/css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="~/assets/plugins/fontawesome-free-5.11.2-web/css/all.min.css">
-    <link rel="stylesheet" href="~/assets/plugins/kipso-icons/style.css">
-    <link rel="stylesheet" href="~/assets/css/magnific-popup.css">
-    <link rel="stylesheet" href="~/assets/css/vegas.min.css">
-
-    <!-- template styles -->
-    <link rel="stylesheet" href="~/assets/css/style.css">
-    <link rel="stylesheet" href="~/assets/css/responsive.css">
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" data-rocket-async="style" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-</head>
 
 <body>
     <div class="preloader"><span></span></div><!-- /.preloader -->
@@ -155,32 +129,34 @@
                                     </ul><!-- /.course-details__curriculum-list -->
                                 </div><!-- /.course-details__tab-content -->
                                 <div class="tab-pane  animated fadeInUp" role="tabpanel" id="comentarios">
-                                    @if (Model.Opiniones != null && Model.Opiniones.Any())
+                                    @foreach (var opinion in Model.Opiniones)
                                     {
-                                        <ul class="course-details__curriculum-list list-unstyled">
-                                            @foreach (var opinion in Model.Opiniones)
-                                            {
-                                                <div class="course-details__comment-single">
-                                                    <div class="course-details__comment-top">
-                                                        <div class="course-details__comment-right">
-                                                            <h2 class="course-details__comment-name">@opinion.Autor</h2>
-                                                            <div class="course-details__comment-meta">
-                                                                <p class="course-details__comment-date">@opinion.Titulo</p>
-                                                            </div><!-- /.course-details__comment-meta -->
-                                                        </div><!-- /.course-details__comment-right -->
-                                                    </div><!-- /.course-details__comment-top -->
-                                                    <p class="course-details__comment-text">@opinion.Descripcion</p>
-                                                </div>
 
-                                                <!-- /.course-details__comment-single -->
-                                            }
-                                        </ul>
+                                        <div class="course-details__comment-single">
+                                            <div class="course-details__comment-top">
 
+                                                <div class="course-details__comment-right">
+                                                    <h2 class="course-details__comment-name">@opinion.Autor</h2>
+                                                    <!-- /.course-details__comment-name -->
+                                                    <div class="course-details__comment-meta">
+                                                        <p class="course-details__comment-date">@opinion.Titulo</p>
+                                                        <!-- /.course-details__comment-date -->
+                                                    </div><!-- /.course-details__comment-meta -->
+                                                </div><!-- /.course-details__comment-right -->
+                                            </div><!-- /.course-details__comment-top -->
+                                            <p class="course-details__comment-text">
+                                                @opinion.Descripcion
+                                            </p>
+                                            <!-- /.course-details__comment-text -->
+                                        </div>
+
+                                        <!-- /.course-details__comment-single -->
                                         <!-- /.course-details__curriculum-list -->
                                     }
-                                    else
+                                    </ul>
+                                    @if (isAuthenticated)
                                     {
-                                        <p>No hay comentarios disponibles para este curso.</p>
+                                        <a href="/Opinion/NuevaOpinion/@Model.Curso.Id" class="thm-btn course-details__comment-form-btn">Deja un comentario</a>
                                     }
                                 </div><!-- /.course-details__tab-content -->
                             </div><!-- /.tab-content -->

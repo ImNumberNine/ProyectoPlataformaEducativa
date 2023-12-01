@@ -13,7 +13,7 @@
         var jwtToken = tokenHandler.ReadJwtToken(Context.Session.GetString("JWToken"));
         userEmail = jwtToken.Claims.First(claim => claim.Type == ClaimTypes.Email).Value;
     }
-    Layout = "_Layout";
+    
 }
 
 <!DOCTYPE html>
