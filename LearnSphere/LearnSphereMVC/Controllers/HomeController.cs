@@ -62,6 +62,11 @@ namespace LearnSphereMVC.Controllers
 
         }
 
+        public IActionResult Contacto()
+        {
+            return View();
+        }
+
         public IActionResult Historia()
         {
             return View();
